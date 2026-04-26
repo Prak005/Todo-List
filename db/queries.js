@@ -27,9 +27,16 @@ async function deleteTodo(id) {
     );
 }
 
+async function deleteCompletedTodos() {
+    await pool.query(
+        `DELETE FROM todos WHERE completed=TRUE`
+    );
+}
+
 module.exports = {
     getAllTodos,
     createTodo,
     toggleTodo,
     deleteTodo,
-}
+    deleteCompletedTodos,
+};
