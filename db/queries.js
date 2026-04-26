@@ -14,7 +14,15 @@ async function createTodo(text) {
     return rows[0];
 }
 
+async function toggleTodo(id) {
+    const { rows } = await pool.query(
+        `UPDATE todos SET completed = NOT completed WHERE id=$1 RETURNING *`,[id]
+    );
+    return rows[0];
+}
+
 module.exports = {
     getAllTodos,
     createTodo,
+    toggleTodo,
 }
