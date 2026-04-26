@@ -38,7 +38,12 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <form class="add-form" action="/todos" method="POST">
+                        <input type="hidden" name="filter" value="<%= filter %>" />
+                        <input class="add-input" type="text" name="text" placeholder="Add a new task..." autocomplete="off" required />
+                        <button class="btn-add" type="submit">+ Add</button>
+                    </form>
+                                        
                 </div>
             </main>
         </div>
