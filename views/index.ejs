@@ -34,7 +34,7 @@
                                 <span><%= pct %>%</span>
                             </div>
                             <div class="progress-track">
-                                <div class="progress-fill" style="width:<%=pct%>%"></div>
+                                <div class="progress-fill" style="width: <%= pct %>%"></div>
                             </div>
                         </div>
                     </div>
@@ -51,13 +51,13 @@
                         <a class="filter-btn <%= filter==='active' ? 'active' : '' %>" href="/?filter=active">
                             Active <span class="badge"><%= totalCount-doneCount %></span>
                         </a>
-                        <a class="filter-btn <%= filer==='completed' ? 'completed' : '' " href="/?filter=completed">
+                        <a class="filter-btn <%= filter==='completed' ? 'active' : '' %>" href="/?filter=completed">
                             Completed <span class="badge"><%= doneCount %></span>
                         </a>
                     </div>
                     
                     <div class="todo-card">
-                        <%= (todos.length === 0) { %> 
+                        <% if (todos.length === 0) { %> 
                             <div class="empty">
                                 <div class="empty-icon">
                                     <% if (filter==='completed') { %>✓<% } else if (filter === 'active') { %>◎<% } else { %>✦<% } %>
