@@ -30,4 +30,10 @@ router.post('/todos', async(req, res) => {
     res.redirect(`/?filter=${filter}`);
 });
 
+router.post('/todos/:id/toggle', async(req, res) => {
+    await toggleTodo(req.params.id);
+    const filter = req.body.filter || 'all';
+    res.redirect(`/?filter=${filter}`);
+});
+
 module.exports = router;
