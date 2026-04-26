@@ -43,7 +43,59 @@
                         <input class="add-input" type="text" name="text" placeholder="Add a new task..." autocomplete="off" required />
                         <button class="btn-add" type="submit">+ Add</button>
                     </form>
-                                        
+                    
+                    <div class="filters">
+                        <a class="filter-btn <%= filter==='all' ? 'active' : '' %>" href="/?filter=all">
+                            All <span class="badge"><%= totalCount %></span>
+                        </a>
+                        <a class="filter-btn <%= filter==='active' ? 'active' : '' %>" href="/?filter=active">
+                            Active <span class="badge"><%= totalCount-doneCount %></span>
+                        </a>
+                        <a class="filter-btn <%= filer==='completed' ? 'completed' : '' " href="/?filter=completed">
+                            Completed <span class="badge"><%= doneCount %></span>
+                        </a>
+                    </div>
+                    
+                    <div class="todo-card">
+                        <%= (todos.length === 0) { %> 
+                            <div class="empty">
+                                <div class="empty-icon">
+                                    <% if (filter==='completed') { %>✓<% } else if (filter === 'active') { %>◎<% } else { %>✦<% } %>
+                                </div>
+                                <p>
+                                    <% if (filter === 'completed') { %>Nothing completed yet.<% } else if (filter === 'active') { %>No active tasks — all done!<% } else { %>No tasks yet. Add one above.<% } %>
+                                </p>
+                            </div>
+                        <% } else { %>
+                            <% todos.forEach(function(todo) { %>
+                                <div class="todo-item <%= todo.completed ? 'done' : '' %>">
+                                    <form class="toggle-form" method="POST" action="/todos/<%= todo.id %>/toggle">
+                                        <input type="hidden" name="filter" value="<%= filter %>"/>
+                                        <button type="submit" class="check-box" title="Toggle complete">
+                                        <% if (todo.completed) { %>
+                                            <img src="/icons/check.svg" alt="check" width="11" height="9"/>
+                                        <% } %>
+                                        </button>
+                                    </form>
+                                    <span class="todo-text"><%= todo.text %></span>
+                                    <span class="todo-date"><%= new Date(todo.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) %></span>
+                                    <form method="POST" action="/todos/<%= todo.id %>/delete">
+                                        <input type="hidden" name="filter" value="<%= filter %>"/>
+                                        <button type="submit" class="btn-delete" title="Delete task">
+                                            <img src="/icons/trash.svg" alt="delete" width="14" height="15"/>
+                                        </button>
+                                    </form>
+                                </div>
+                            <% }); %>
+                        <% } %>
+                    </div>
+                    <% if (doneCount > 0) { %>
+                        <div class="toolbar">
+                            <form method="POST" action="/todos/clear-completed">
+                                <button type="submit" class="btn-clear">Clear completed (<%= doneCount %>)</button>
+                            </form>
+                        </div>
+                    <% } %>
                 </div>
             </main>
         </div>
