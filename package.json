@@ -17,5 +17,14 @@
   "bugs": {
     "url": "https://github.com/Prak005/Todo-List/issues"
   },
-  "homepage": "https://github.com/Prak005/Todo-List#readme"
+  "homepage": "https://github.com/Prak005/Todo-List#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "pg": "^8.20.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
 }
