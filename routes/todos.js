@@ -21,4 +21,13 @@ router.get('/', async(req, res) => {
     });
 });
 
+router.post('/todos', async(req, res) => {
+    const { text } = req.body;
+    if(text && text.trim()) {
+        await createTodo(text);
+    }
+    const filter = req.body.filter || 'all';
+    res.redirect(`/?filter=${filter}`);
+});
+
 module.exports = router;
