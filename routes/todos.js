@@ -42,4 +42,9 @@ router.post('/todos/:id/delete', async(req, res) => {
     res.redirect(`/?filter=${filter}`);
 });
 
+router.post('/todos/clear-completed', async(req, res) => {
+    await db.deleteCompletedTodos();
+    res.redirect('/?filter=all');
+});
+
 module.exports = router;
