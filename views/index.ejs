@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TaskFlow</title>
+    </head>
+    <body>
+        <div class="layout">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <img src="/icons/logo.svg" alt="logo" width="18" height="18" />
+                    TaskFlow
+                </div>
+            </nav>
+            <main class="main">
+                <div class="content">
+                    <% const pct = totalCount ? Math.round((doneCount/totalCount)*100) : 0; %>
+                    <div class="stats-bar">
+                        <div class="stat">
+                            <div class="stat-value"><%= totalCount %></div>
+                            <div class="stat-label">Total</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value"><%= totalCount-doneCount %></div>
+                            <div class="stat-label">Active</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value"><%= doneCount %></div>
+                            <div class="stat-label">Done</div>
+                        </div>
+                        <div class="progress-wrap">
+                            <div class="progress-label">
+                                <span>Progress</span>
+                                <span><%= pct %>%</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="width:<%=pct%>%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </main>
+        </div>
+    </body>
+</html>
