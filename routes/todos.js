@@ -5,7 +5,7 @@ const db = require('../db/queries');
 
 router.get('/', async(req, res) => {
     const filter = req.query.filter || 'all';
-    const allTodos = await getAllTodos();
+    const allTodos = await db.getAllTodos();
     let todos = allTodos;
     if(filter === 'active'){
         todos = allTodos.filter((t) => !t.completed);
@@ -24,20 +24,20 @@ router.get('/', async(req, res) => {
 router.post('/todos', async(req, res) => {
     const { text } = req.body;
     if(text && text.trim()) {
-        await createTodo(text);
+        await db.createTodo(text);
     }
     const filter = req.body.filter || 'all';
     res.redirect(`/?filter=${filter}`);
 });
 
 router.post('/todos/:id/toggle', async(req, res) => {
-    await toggleTodo(req.params.id);
+    await db.toggleTodo(req.params.id);
     const filter = req.body.filter || 'all';
     res.redirect(`/?filter=${filter}`);
 });
 
 router.post('/todos/:id/delete', async(req, res) => {
-    await deleteTodo(req.params.id);
+    await db.deleteTodo(req.params.id);
     const filter = req.body.filter || 'all';
     res.redirect(`/?filter=${filter}`);
 });
