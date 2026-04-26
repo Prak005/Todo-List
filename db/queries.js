@@ -21,8 +21,15 @@ async function toggleTodo(id) {
     return rows[0];
 }
 
+async function deleteTodo(id) {
+    await pool.query(
+        `DELETE FROM todos WHERE id=$1`,[id]
+    );
+}
+
 module.exports = {
     getAllTodos,
     createTodo,
     toggleTodo,
+    deleteTodo,
 }
